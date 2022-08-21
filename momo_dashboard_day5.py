@@ -10,13 +10,7 @@ import numpy as np
 import altair as alt
 import pandas as pd
 import streamlit as st
-#from datetime import datetime
 
-#loaddata
-#df = pd.read_csv('total_refugees_by_month.csv')
-
-#slidebar
-add_sidebar = st.sidebar.selectbox('Chart Type',('Line Chart','Bar Chart'))
 
 st.header('Day 5 CHALLENGE:hatched_chick:')
 
@@ -48,6 +42,9 @@ df2 = pd.DataFrame(
 c = alt.Chart(df2).mark_circle().encode(
      x='a', y='b', size='c', color='c', tooltip=['a', 'b', 'c'])
 st.write(c)
+
+#slidebar
+add_sidebar = st.sidebar.selectbox('Chart Type',('Line Chart','Bar Chart'))
 
 #switchedchart
 if add_sidebar == 'Line Chart':
