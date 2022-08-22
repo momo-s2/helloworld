@@ -5,35 +5,43 @@ Created on Sat Aug 20 15:09:44 2022
 
 @author: momo
 """
-#import libs
-import numpy as np
-import altair as alt
-import pandas as pd
 import streamlit as st
 
+st.title('#30 Days of Streamlit')
+st.header('Day 10-12 CHALLENGE:hatched_chick:')
 
-st.header('Day 5 CHALLENGE:hatched_chick:')
+st.subheader('st.selectbox')
+
+option = st.selectbox(
+    'which area would you like to go?',
+    ('Africa','America','Antarctica','Asia','Europe','Oceania'))
+
+st.write('Where you want to go is', option)
 
 
-st.write('DataFrame-list')
-df = pd.DataFrame([[1,2,3],[4,5,6],[7,8,9]],
-                   columns = ['col1','col2','col3'],
-                   index = ['i1','i2','i3'])
-st.write(df)
+st.subheader('st.multiselect')
 
-st.write('DataFrame-NumPy')
-df = pd.DataFrame(np.array([[1,2,3],[4,5,6],[7,8,9]]),
-                   columns = ['col1','col2','col3'],
-                   index = ['i1','i2','i3'])
-st.write(df)
+options = st.multiselect(
+    'which country would you like to go?',
+    ['Kenya','Uganda','Tanzania','Rwanda','Brundi','Somalia'],
+    )
 
-st.write('DataFrame-dictionary')
-df = pd.DataFrame({'col1':[1,2,3],
-                   'col2':[4,5,6],
-                   'col3':[7,8,9]}
-                    ,index = ['i1','i2','i3'])
-st.write(df)
+st.write('You selected:',options)
 
+st.subheader('st.checkbox')
+
+st.write('which country would you like to go?')
+
+Kenya = st.checkbox('Kenya')
+Tanzania = st.checkbox('Tanzania')
+Uganda = st.checkbox('Uganda')
+s
+if Kenya:
+    st.write('You should go Masai Mara 🐘')
+if Tanzania:
+    st.write('You should go Zanzibar 🌴')
+if Uganda:
+    st.write('You should go Bwindi Impenetrable National Park 🦍')
 
 #chart
 df2 = pd.DataFrame(
