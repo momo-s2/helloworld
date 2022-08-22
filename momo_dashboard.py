@@ -40,7 +40,7 @@ st.write('which country would you like to go?')
 Kenya = st.checkbox('Kenya')
 Tanzania = st.checkbox('Tanzania')
 Uganda = st.checkbox('Uganda')
-s
+
 if Kenya:
     st.write('You should go Masai Mara 🐘')
 if Tanzania:
