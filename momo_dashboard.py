@@ -12,6 +12,12 @@ import pandas as pd
 import streamlit as st
 from datetime import time, datetime
 
+st.header('Day 17 of #30 Days of Streamlit:hatched_chick:')
+st.title('st.secrets')
+st.write(st.secrets('test_secrets_key'))
+
+
+
 st.title('#30 Days of Streamlit')
 st.header('Day 10-12 CHALLENGE:hatched_chick:')
 
