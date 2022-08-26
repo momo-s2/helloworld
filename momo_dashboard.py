@@ -9,6 +9,8 @@ Created on Sat Aug 20 15:09:44 2022
 import streamlit as st
 import pandas as pd
 
+st.header('Day 18 of #30 Days of Streamlit:hatched_chick:')
+
 st.title('st.file_uploader')
 
 st.subheader('Input CSV')
