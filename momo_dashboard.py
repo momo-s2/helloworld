@@ -6,12 +6,19 @@ Created on Sat Aug 20 15:09:44 2022
 @author: momo
 """
 #import libs
-import numpy as np
-import altair as alt
-import pandas as pd
 import streamlit as st
-from datetime import time, datetime
+import pandas as pd
 
-st.header('Day 17 of #30 Days of Streamlit:hatched_chick:')
-st.title('st.secrets')
-st.write(st.secrets(['test_secrets_key']))
+st.title('st.file_uploader')
+
+st.subheader('Input CSV')
+uploaded_file = st.file_uploader("Choose a file")
+
+if uploaded_file is not None:
+  df = pd.read_csv(uploaded_file)
+  st.subheader('DataFrame')
+  st.write(df)
+  st.subheader('Descriptive Statistics')
+  st.write(df.describe())
+else:
+  st.info('☝️ Upload a CSV file')
