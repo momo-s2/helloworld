@@ -7,22 +7,38 @@ Created on Sat Aug 20 15:09:44 2022
 """
 #import libs
 import streamlit as st
-import pandas as pd
 
-st.header('Day 18 of #30 Days of Streamlit:hatched_chick:')
+st.title('st.form')
 
-st.title('st.file_uploader')
+# Full example of using the with notation
+st.header('Day 22 of #30 Days of Streamlit:hatched_chick:')
 
-st.subheader('Input CSV')
-uploaded_file = st.file_uploader('Choose a file')
 
-if uploaded_file is not None:
-  df = pd.read_csv(uploaded_file)
-  st.subheader('DataFrame')
-  st.write(df)
-  st.subheader('Descriptive Statistics')
-  st.write(df.describe())
-  st.write(df.describe())
+with st.form('my_form'):
+    st.subheader('What would you want to drink?')
+
+    product = st.selectbox('Product', ['-', 'Caffé Latte', 'Caffé Americano', 'Cappuccino', 'Espresso'])
+    serving_format = st.selectbox('Serving format', ['-','Hot', 'Iced'])
+    size= st.selectbox('Size', ['-', 'Short', 'Tall', 'Grande','Venti'])
+    milktype = st.selectbox('Type of milk',['-', 'Whole milk', 'Non-fat milk', 'Soy milk','Oat milk', 'Almond milk'])
+    customize = st.multiselect(
+        'Customize',
+        ['honey', 'cinnamon', 'whipped cream', 'espresso shot']
+        )
+    owncup = st.checkbox('Bring own cup')
+
+    submitted = st.form_submit_button('Submit')
+
+if submitted:
+    st.markdown(f'''
+        ☕ You have ordered:
+        - Product: '{product}'
+        - Serving format: '{serving_format}'
+        - Size: '{size}'
+        - Type of milk: '{milktype}'
+        - Cuztomize: '{customize}'
+        - Bring own cup: '{owncup}'
+        ''')
+        
 else:
-  st.info('☝️ Upload a CSV file')
-      
+    st.write('☝️ Place your order!')
