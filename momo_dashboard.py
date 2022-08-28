@@ -8,37 +8,33 @@ Created on Sat Aug 20 15:09:44 2022
 #import libs
 import streamlit as st
 
-st.title('st.form')
+st.title('st.experimental_get_query_params')
 
-# Full example of using the with notation
-st.header('Day 22 of #30 Days of Streamlit:hatched_chick:')
+st.header('Day 23 of #30 Days of Streamlit:hatched_chick:')
+
+with st.expander('About this app'):
+  st.write("`st.experimental_get_query_params` allows the retrieval of query parameters directly from the URL of the user's browser.")
+
+# 1. Instructions
+st.header('1. Instructions')
+st.markdown('''
+In the above URL bar of your internet browser, append the following:
+`?name=Jack&surname=Beanstalk`
+after the base URL `http://share.streamlit.io/dataprofessor/st.experimental_get_query_params/`
+such that it becomes 
+`http://share.streamlit.io/dataprofessor/st.experimental_get_query_params/?firstname=Jack&surname=Beanstalk`
+''')
 
 
-with st.form('my_form'):
-    st.subheader('What would you want to drink?')
+# 2. Contents of st.experimental_get_query_params
+st.header('2. Contents of st.experimental_get_query_params')
+st.write(st.experimental_get_query_params())
 
-    product = st.selectbox('Product', ['-', 'Caffé Latte', 'Caffé Americano', 'Cappuccino', 'Espresso'])
-    serving_format = st.selectbox('Serving format', ['-','Hot', 'Iced'])
-    size= st.selectbox('Size', ['-', 'Short', 'Tall', 'Grande','Venti'])
-    milktype = st.selectbox('Type of milk',['-', 'Whole milk', 'Non-fat milk', 'Soy milk','Oat milk', 'Almond milk'])
-    customize = st.multiselect(
-        'Customize',
-        ['honey', 'cinnamon', 'whipped cream', 'espresso shot']
-        )
-    owncup = st.checkbox('Bring own cup')
 
-    submitted = st.form_submit_button('Submit')
+# 3. Retrieving and displaying information from the URL
+st.header('3. Retrieving and displaying information from the URL')
 
-if submitted:
-    st.markdown(f'''
-        ☕ You have ordered:
-        - Product: '{product}'
-        - Serving format: '{serving_format}'
-        - Size: '{size}'
-        - Type of milk: '{milktype}'
-        - Cuztomize: '{customize}'
-        - Bring own cup: '{owncup}'
-        ''')
-        
-else:
-    st.write('☝️ Place your order!')
+firstname = st.experimental_get_query_params()['firstname'][0]
+surname = st.experimental_get_query_params()['surname'][0]
+
+st.write(f'Hello **{firstname} {surname}**, how are you?')
