@@ -1,40 +1,32 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Aug 20 15:09:44 2022
-
-@author: momo
-"""
-#import libs
 import streamlit as st
-import requests
 
-st.title('Bored API app')
-st.header('Day 26 of #30 Days of Streamlit:hatched_chick:')
+st.title('🖼️ yt-img-app')
+st.header('YouTube Thumbnail Image Extractor App')
 
-st.sidebar.header('Input')
-selected_type = st.sidebar.selectbox('Select an activity type',[
-    'education', 'recreational', 'social', 'diy', 'charity', 'cooking', 'relaxation', 'music', 'busywork'
-    ])
-suggested_activity_url =  f'http://www.boredapi.com/api/activity?type={selected_type}'
-json_data = requests.get(suggested_activity_url)
-suggested_activity = json_data.json()
+with st.expander('About this app'):
+  st.write('This app retrieves the thumbnail image from a YouTube video.')
 
-c1, c2 = st.columns(2)
-with c1:
-    with st.expander('About ths app'):
-        st.write('Are you bored? The **Bored API app** provides suggestions on activities that you can do when you are bored. This app is powered by the Bored API.')
-with c2:
-    with st.expander('JSON data'):
-        st.write(suggested_activity)
-        
-st.header('Suggested activity')
-st.info(suggested_activity['activity'])
+# Image settings
+st.sidebar.header('Settings')
+img_dict = {'Max': 'maxresdefault', 'High': 'hqdefault', 'Medium': 'mqdefault', 'Standard': 'sddefault'}
+selected_img_quality = st.sidebar.selectbox('Select image quality', ['Max', 'High', 'Medium', 'Standard'])
+img_quality = img_dict[selected_img_quality]
 
-col1, col2, col3 = st.columns(3)
-with col1:
-  st.metric(label='Number of Participants', value=suggested_activity['participants'], delta='')
-with col2:
-  st.metric(label='Type of Activity', value=suggested_activity['type'].capitalize(), delta='')
-with col3:
-  st.metric(label='Price', value=suggested_activity['price'], delta='')
+yt_url = st.text_input('Paste YouTube URL', 'https://youtu.be/JwSS70SZdyM')
+
+def get_ytid(input_url):
+  if 'youtu.be' in input_url:
+    ytid = input_url.split('/')[-1]
+  if 'youtube.com' in input_url:
+    ytid = input_url.split('=')[-1]
+  return ytid
+
+# Display YouTube thumbnail image
+if yt_url != '':
+  ytid = get_ytid(yt_url) # yt or yt_url
+
+  yt_img = f'http://img.youtube.com/vi/{ytid}/{img_quality}.jpg'
+  st.image(yt_img)
+  st.write('YouTube video thumbnail image URL: ', yt_img)
+else:
+  st.write('☝️ Enter URL to continue ...')
